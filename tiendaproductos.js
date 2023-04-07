@@ -20,44 +20,39 @@ const audifonos = new Producto(4, 'Manos libres', 10000)
 
 // guardamos los productos
 const productos = [teclado, mouse, bluetooth, audifonos]
-console.log(productos);
 
-let productoEscogido = prompt('Escoge el producto que deseas comprar:  teclado, mouse, bluetooth, audifonos')
-console.log(productoEscogido);
-
+let productoEscogido = parseInt(prompt('Escoge el producto que deseas comprar:  1.teclado - 2.mouse - 3.bluetooth - 4.audifonos'));
 // variable para condicion del ciclo
 let seguirComprando = true;
 const carrito = []
 
 while (seguirComprando === true) {
-    console.log("entro al ciclo");
     //buscar el producto escogido
-    const producto = productos.find(
-        (producto) => producto.nombre === productoEscogido.toLowerCase().trim()
-    );    
-    console.log(producto.nombre);
+    let producto = productos.find((producto => producto.id === productoEscogido));
     // guardar producto en carrito o preguntarle al usuario un producto existente
-    if (producto != 0) {
+    if (producto) {
         carrito.push(producto)
     } else {
-        productoEscogido = prompt("Escoge un producto correcto: teclado-mouse-bluetooth-audifonos")
+        productoEscogido = parseInt(prompt('Escoge el producto que deseas comprar:  1.teclado - 2.mouse - 3.bluetooth - 4.audifonos'));
         continue
     }
 
     const decision = prompt('Deseas seguir comprando? si-no')
     if (decision === 'si') {
-        productoEscogido = prompt('Escoge el producto que deseas comprar:  teclado-mouse-bluetooth-audifonos')
+        productoEscogido = parseInt(prompt('Escoge el producto que deseas comprar:  1.teclado - 2.mouse - 3.bluetooth - 4.audifonos'));
     } else {
         seguirComprando = false
     }
 }
-
-console.log(carrito);
+let nomProducto = [];
 let totalCompra = 0
 // for (const producto of carrito) {
 //      totalCompra = totalCompra + producto.precio
 //}
-carrito.forEach(producto=>{
-    totalCompra = totalCompra+producto.precio
+carrito.forEach(producto => {
+    nomProducto.push(producto.nombre)
+    totalCompra = totalCompra + producto.precio
 })
-alert('El total de tu compra es:' + totalCompra);
+console.log(nomProducto);
+alert(`El total de tu compra es:  $ ${totalCompra} \n 
+los productos comprados fueron: \n ${nomProducto}`);
